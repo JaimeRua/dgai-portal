@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "dgai-portal-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/dgaiPortal/DgaiPortalWebPart.js",
+          "manifest": "./src/webparts/dgaiPortal/DgaiPortalWebPart.manifest.json"
+        }
+      ]
+    },
+    "dgai-layout-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/dgaiLayout/DgaiLayoutApplicationCustomizer.js",
+          "manifest": "./src/extensions/dgaiLayout/DgaiLayoutApplicationCustomizer.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "DgaiPortalWebPartStrings": "lib/webparts/dgaiPortal/loc/{locale}.js",
+    "DgaiLayoutApplicationCustomizerStrings": "lib/extensions/dgaiLayout/loc/{locale}.js"
+  }
+}

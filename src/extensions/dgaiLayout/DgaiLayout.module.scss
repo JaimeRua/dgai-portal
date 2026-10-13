@@ -1,0 +1,398 @@
+/* ============================================================
+   HEADER DGAI
+   ============================================================ */
+
+.dgaiHeader {
+  height: 64px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 28px;
+
+  background: linear-gradient(
+  90deg,
+  #004A99 0%,
+  #0061C2 55%,
+  #1E7FE5 100%
+);
+
+  color: #ffffff;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.university {
+  font-size: 11px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  opacity: 0.85;
+}
+
+.title {
+  margin-top: 2px;
+
+  font-size: 19px;
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  flex-shrink: 0;
+}
+
+.siteName {
+  font-size: 14px;
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SIDEBAR DGAI
+   ============================================================ */
+
+.dgaiSidebar {
+  position: fixed;
+
+  left: 0;
+
+  /*
+   * Este valor lo calcula TypeScript a partir de la posición
+   * real del Header DGAI.
+   */
+  top: var(--dgai-header-bottom, 64px);
+
+  width: var(--dgai-sidebar-width, 260px);
+
+  height: calc(
+    100vh - var(--dgai-header-bottom, 64px)
+  );
+
+  padding: 20px 12px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #e5e5e5;
+
+  box-sizing: border-box;
+
+  z-index: 100;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  font-family: "Segoe UI", Arial, sans-serif;
+
+  transition:
+    width 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+/* ============================================================
+   TÍTULO SIDEBAR
+   ============================================================ */
+
+.sidebarTitle {
+  padding: 0 14px 12px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #605e5c;
+
+  text-transform: uppercase;
+}
+
+
+/* ============================================================
+   ENLACES
+   ============================================================ */
+
+.navLink {
+  display: block;
+
+  margin-bottom: 5px;
+  padding: 11px 14px;
+
+  border-radius: 7px;
+
+  color: #323130;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.navLink:hover {
+  background: #f3f2f1;
+
+  color: #00566b;
+
+  text-decoration: none;
+}
+
+.navLinkActive {
+  background: #e6f2f4;
+
+  color: #00566b;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   RESPONSIVE - PANTALLAS MEDIANAS
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+  .navLink {
+    padding: 10px 12px;
+
+    font-size: 13px;
+  }
+
+  .sidebarTitle {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .dgaiHeader {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE - TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .dgaiSidebar {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .sidebarTitle {
+    display: none;
+  }
+
+  .navLink {
+    height: 42px;
+
+    padding: 10px 8px;
+
+    font-size: 0;
+
+    text-align: center;
+  }
+
+  .dgaiHeader {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .university {
+    font-size: 10px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .siteName {
+    font-size: 12px;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE - MÓVIL
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+  /*
+   * Por ahora ocultamos el sidebar.
+   * Después agregaremos el botón hamburguesa.
+   */
+  .dgaiSidebar {
+    display: none;
+  }
+
+  .dgaiHeader {
+    height: 58px;
+
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .university {
+    font-size: 9px;
+  }
+
+  .title {
+    font-size: 14px;
+
+    max-width: 70vw;
+  }
+
+  .right {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   FUTURO DRAWER MÓVIL
+   ============================================================ */
+
+.dgaiSidebarOpen {
+  display: block;
+  transform: translateX(0);
+}
+
+.navItemWrapper {
+  width: 100%;
+}
+
+.navSeparator {
+  height: 1px;
+
+  margin: 10px 14px;
+
+  background: #c8c6c4;
+}
+
+.navLink {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  padding: 11px 14px;
+  margin-bottom: 4px;
+
+  border-radius: 8px;
+
+  color: #323130;
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 400;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.navLink::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 20%;
+
+  width: 3px;
+  height: 60%;
+
+  border-radius: 0 3px 3px 0;
+
+  background: #c94f12;
+
+  opacity: 0;
+  transform: scaleY(0.5);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navLink:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 97, 194, 0.12) 0%,
+    rgba(0, 97, 194, 0.04) 100%
+  );
+
+  color: #0061C2;
+
+  transform: translateX(3px);
+
+  box-shadow:
+    0 2px 8px rgba(0, 97, 194, 0.08);
+
+  text-decoration: none;
+}
+
+.navLink:hover::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.navLinkActive {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 97, 194, 0.16) 0%,
+    rgba(0, 97, 194, 0.06) 100%
+  );
+
+  color: #0061C2;
+
+  font-weight: 600;
+}
+
+.navLinkActive::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.navLink:hover {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 97, 194, 0.14),
+    rgba(0, 97, 194, 0.03)
+  );
+
+  color: #0061C2;
+
+  border-bottom: 2px solid #c94f12;
+}

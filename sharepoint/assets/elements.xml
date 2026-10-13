@@ -1,0 +1,10 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <CustomAction
+    Title="DGAI Portal - Layout Institucional"
+    Location="ClientSideExtension.ApplicationCustomizer"
+    ClientSideComponentId="4e031407-8878-41ca-a87d-19dd963c5720"
+    ClientSideComponentProperties="{}">
+  </CustomAction>
+</Elements>

@@ -1,0 +1,406 @@
+.dgaiPortal {
+  width: 100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #242424;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 48px;
+  border-radius: 16px;
+  background:
+    linear-gradient(
+      120deg,
+      #003b5c 0%,
+      #005f73 55%,
+      #0a9396 100%
+    );
+  color: #ffffff;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  right: -90px;
+  top: -140px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.hero p {
+  max-width: 620px;
+  margin: 18px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.content {
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+
+  padding:
+    6px
+    32px
+    28px
+    0;
+
+  box-sizing: border-box;
+}
+
+.sectionHeader {
+  margin-bottom: 24px;
+}
+
+.sectionHeader h2,
+.resources h2 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  color: #003b5c;
+}
+
+.sectionHeader p,
+.resources p {
+  margin: 0;
+  color: #616161;
+  font-size: 15px;
+}
+
+.areaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.areaCard {
+  position: relative;
+  min-height: 210px;
+  padding: 28px;
+  border: 1px solid #e1e1e1;
+  border-radius: 12px;
+  background: #ffffff;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.areaCard:hover {
+  transform: translateY(-3px);
+  border-color: #0a9396;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.cardNumber {
+  margin-bottom: 22px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a9396;
+}
+
+.areaCard h3 {
+  margin: 0 0 12px;
+  font-size: 21px;
+  color: #003b5c;
+}
+
+.areaCard p {
+  margin: 0 0 24px;
+  line-height: 1.55;
+  color: #555555;
+}
+
+.cardLink {
+  color: #006d77;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cardLink:hover {
+  text-decoration: underline;
+}
+
+.resources {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  margin-top: 32px;
+  padding: 28px;
+  border-radius: 12px;
+  background: #f5f7f8;
+}
+
+.quickLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.quickLinks a {
+  padding: 10px 16px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #003b5c;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.quickLinks a:hover {
+  border-color: #0a9396;
+}
+
+@media (max-width: 900px) {
+  .areaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .resources {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 40px 24px;
+  }
+
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .content {
+    padding-top: 28px;
+  }
+}
+
+.homeLayout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    300px;
+
+  gap: 40px;
+
+  width: 100%;
+
+  margin: 0;
+
+  align-items: start;
+
+}
+
+.homeSections {
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+.homeSection {
+  margin-bottom: 28px;
+}
+
+.homeSectionTitle {
+  margin: 0 0 12px 0;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #c94f12;
+}
+
+.homeLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 4px 0;
+
+  color: #323130;
+
+  text-decoration: none;
+
+  font-size: 16px;
+
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.homeLink:hover {
+  color: #00566b;
+
+  text-decoration: underline;
+
+  transform: translateX(2px);
+}
+
+.homeLinkIcon {
+  width: 22px;
+
+  display: inline-flex;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+
+  .homeLayout {
+    display: block;
+  }
+
+  .homeSectionTitle {
+    font-size: 17px;
+  }
+
+  .homeLink {
+    font-size: 15px;
+  }
+}
+
+.homeLayout {
+  width: 100%;
+  margin: 0;
+  gap: 40px;
+}
+
+.homeSections {
+  min-width: 0;
+}
+
+.homeBrand {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding-top: 40px;
+}
+
+.homeSection {
+  margin-bottom: 30px;
+}
+
+.homeSectionTitle {
+  margin: 0 0 12px 0;
+
+  font-size: 19px;
+  font-weight: 700;
+
+  color: #c94f12;
+}
+
+.homeLinks {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.homeLink {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 4px 0;
+
+  color: #323130;
+
+  text-decoration: none;
+
+  font-size: 16px;
+}
+
+.homeLink:hover {
+  color: #00566b;
+
+  text-decoration: underline;
+}
+
+.homeLinkIcon {
+  width: 24px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+@media (max-width: 1000px) {
+
+  .homeLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .homeBrand {
+    order: -1;
+
+    justify-content: flex-start;
+
+    padding-top: 0;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.dgaiLogo {
+  display: block;
+
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+
+  object-fit: contain;
+}

@@ -1,0 +1,46 @@
+
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "dgai-portal-client-side-solution",
+    "id": "68c6feb1-73e9-4e38-ac95-9b917d0c6948",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": false,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "Direccion General de Analisis Institucional",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.23.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Portal institucional DGAI"
+      },
+      "longDescription": {
+        "default": "Solucion SharePoint Framework para el portal DGAI. Incluye una WebPart React para presentar contenidos y accesos institucionales y una Extension Application Customizer para personalizar el encabezado, la navegacion lateral y la distribucion visual del sitio."
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "DGAI Portal - Componentes de sitio",
+        "description": "Registra los componentes SPFx del portal DGAI en el sitio donde se instala la aplicacion.",
+        "id": "ee3c05de-5c8d-4016-9cbc-f8a7c5432631",
+        "version": "1.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml"
+          ]
+        }
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/dgai-portal.sppkg"
+  }
+}

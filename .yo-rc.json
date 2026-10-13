@@ -1,0 +1,20 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "useGulp": false,
+    "plusBeta": false,
+    "isCreatingSolution": false,
+    "nodeVersion": "22.23.3",
+    "sdksVersions": {},
+    "version": "1.23.2",
+    "libraryName": "dgai-portal",
+    "libraryId": "68c6feb1-73e9-4e38-ac95-9b917d0c6948",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "dgai-portal",
+    "solutionShortDescription": "dgai-portal description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}

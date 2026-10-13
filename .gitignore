@@ -1,0 +1,56 @@
+
+# Dependencias
+node_modules/
+
+# Compilación SPFx y Heft
+dist/
+lib/
+temp/
+coverage/
+heft/
+build/
+*.tsbuildinfo
+
+# Paquetes generados
+sharepoint/solution/
+*.sppkg
+
+# Variables y secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Certificados locales
+*.cer
+*.crt
+
+# Sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+
+# Archivos locales de Visual Studio
+.vs/
+
+# Salidas de compilación SPFx / Heft
+lib-commonjs/
+release/
+jest-output/
+
+# Archivos de depuración
+*.map
+
+# Paquetes generados
+sharepoint/solution/
