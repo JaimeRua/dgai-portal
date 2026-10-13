@@ -11,6 +11,7 @@ import type { SPFI } from '@pnp/sp';
 
 import { DgaiLayoutService } from './services/DgaiLayoutService';
 import type { IDgaiLayoutItem } from './models/IDgaiLayoutItem';
+import { getSafePortalUrl } from '../../shared/security/portalUrl';
 
 export interface IDgaiLayoutApplicationCustomizerProperties {
   testMessage?: string;
@@ -38,6 +39,10 @@ export default class DgaiLayoutApplicationCustomizer
   private _layoutService!: DgaiLayoutService;
   private _navigationItems: IDgaiLayoutItem[] = [];
   private _originalPaddingLeft?: string;
+  private _originalPaddingTop?: string;
+  private _originalBoxSizing?: string;
+  private _nativeNavigationElement?: HTMLElement;
+  private _originalNativeNavigationDisplay?: string;
 
   public async onInit(): Promise<void> {
 
@@ -155,81 +160,68 @@ export default class DgaiLayoutApplicationCustomizer
       ) as HTMLElement | null;
 
     if (nativeNavigation) {
-      nativeNavigation.style.display =
-        'none';
+      if (!this._nativeNavigationElement) {
+        this._nativeNavigationElement = nativeNavigation;
+        this._originalNativeNavigationDisplay = nativeNavigation.style.display;
+      }
+      nativeNavigation.style.display = 'none';
     }
   }
 
   private _createSidebar(): void {
-
-    if (
-      document.getElementById(
-        'dgai-custom-sidebar'
-      )
-    ) {
+    if (document.getElementById('dgai-custom-sidebar')) {
       return;
     }
 
-    const sidebar =
-      document.createElement('aside');
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'dgai-custom-sidebar';
+    sidebar.className = styles.dgaiSidebar;
 
-    sidebar.id =
-      'dgai-custom-sidebar';
+    const sidebarTitle = document.createElement('div');
+    sidebarTitle.className = styles.sidebarTitle;
+    sidebarTitle.textContent = 'Navegación';
+    sidebar.appendChild(sidebarTitle);
 
-    sidebar.className =
-      styles.dgaiSidebar;
+    const currentPath = window.location.pathname.toLowerCase();
+    const items = [...this._navigationItems].sort((a, b) => a.order - b.order);
 
-    const currentPath =
-      window.location.pathname.toLowerCase();
+    for (const item of items) {
+      const wrapper = document.createElement('div');
+      wrapper.className = styles.navItemWrapper;
 
-    const navigationHtml =
-      this._navigationItems
-        .sort((a, b) => a.order - b.order)
-        .map((item) => {
+      const link = document.createElement('a');
+      link.className = styles.navLink;
+      link.textContent = item.title;
+      link.title = item.title;
 
-          const itemUrl = item.url.toLowerCase();
+      const safeUrl = getSafePortalUrl(item.url);
+      if (safeUrl) {
+        link.href = safeUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        const destination = new URL(safeUrl);
+        if (
+          destination.origin === window.location.origin &&
+          currentPath === destination.pathname.toLowerCase()
+        ) {
+          link.classList.add(styles.navLinkActive);
+        }
+      } else {
+        link.setAttribute('aria-disabled', 'true');
+      }
 
-          const isActive =
-            itemUrl !== '#' &&
-            (
-              currentPath === itemUrl ||
-              currentPath.endsWith(itemUrl)
-            );
+      wrapper.appendChild(link);
 
-          const cssClass = isActive
-            ? `${styles.navLink} ${styles.navLinkActive}`
-            : styles.navLink;
+      if (item.separatorAfter) {
+        const separator = document.createElement('div');
+        separator.className = styles.navSeparator;
+        wrapper.appendChild(separator);
+      }
 
-          return `
-        <div class="${styles.navItemWrapper}">
-          <a
-            class="${cssClass}"
-            href="${item.url}"
-            title="${item.title}"
-          >
-            ${item.title}
-          </a>
+      sidebar.appendChild(wrapper);
+    }
 
-          ${item.separatorAfter
-              ? `<div class="${styles.navSeparator}"></div>`
-              : ''
-            }
-        </div>
-      `;
-        })
-        .join('');
-
-    sidebar.innerHTML = `
-    <div class="${styles.sidebarTitle}">
-      Navegación
-    </div>
-
-    ${navigationHtml}
-  `;
-
-    document.body.appendChild(
-      sidebar
-    );
+    document.body.appendChild(sidebar);
   }
 
   private _adjustSharePointContent(): void {
@@ -255,6 +247,8 @@ export default class DgaiLayoutApplicationCustomizer
 
     this._originalPaddingLeft =
       content.style.paddingLeft;
+    this._originalPaddingTop = content.style.paddingTop;
+    this._originalBoxSizing = content.style.boxSizing;
 
     /*
      * Ya no desplazamos el contenido.
@@ -265,7 +259,6 @@ export default class DgaiLayoutApplicationCustomizer
     content.style.width = '100%';
     content.style.paddingLeft = '24px';
     content.style.boxSizing = 'border-box';
-    content.style.paddingTop = '-40px';
 
     console.log(
       '[DgaiLayout] Área de contenido ajustada sin margen lateral adicional.'
@@ -490,9 +483,11 @@ export default class DgaiLayoutApplicationCustomizer
 
     sidebar?.remove();
 
-    window.removeEventListener(
-      'resize',
-      this._updateResponsiveLayout
+    this._siteHeaderObserver?.disconnect();
+    this._siteHeaderObserver = undefined;
+    this.context.placeholderProvider.changedEvent.remove(
+      this,
+      this._renderPlaceholders
     );
 
     document.documentElement.style.removeProperty(
@@ -510,7 +505,14 @@ export default class DgaiLayoutApplicationCustomizer
       this._contentElement.style.paddingLeft =
         this._originalPaddingLeft || '';
 
-      this._contentElement.style.boxSizing = '';
+      this._contentElement.style.boxSizing =
+        this._originalBoxSizing || '';
+      this._contentElement.style.paddingTop =
+        this._originalPaddingTop || '';
+    }
+    if (this._nativeNavigationElement) {
+      this._nativeNavigationElement.style.display =
+        this._originalNativeNavigationDisplay || '';
     }
     if (this._siteHeaderElement) {
 

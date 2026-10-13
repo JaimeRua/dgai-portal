@@ -6,6 +6,7 @@ import type { IDgaiPortalProps } from './IDgaiPortalProps';
 import type { IDgaiHomeItem } from '../models/IDgaiHomeItem';
 
 import dgaiLogo from '../assets/dgai-logo.png';
+import { getSafePortalUrl } from '../../../shared/security/portalUrl';
 
 interface IDgaiPortalState {
   homeItems: IDgaiHomeItem[];
@@ -145,7 +146,9 @@ export default class DgaiPortal extends React.Component<
 
                   <a
                     key={item.id}
-                    href={item.url}
+                    href={getSafePortalUrl(item.url)}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={styles.homeLink}
                   >
 
